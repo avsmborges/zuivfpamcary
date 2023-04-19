@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://dev:8070/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='S4ALIAS')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zui_fi_vf_pamcary" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="I_PurchasingDocumentStdVHType" sap:label="Documento de compras" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchasingDocument"/>
+                </Key>
+                <Property Name="PurchasingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Documento de compras" sap:quickinfo="Nº do documento de compras"/>
+            </EntityType>
+            <EntityType Name="FiliasUsuarioType" sap:label="Search Help para Filiais do Usuário" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Branch"/>
+                </Key>
+                <Property Name="Branch" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="BranchName" sap:label="Local de negócios"/>
+                <Property Name="BranchName" Type="Edm.String" MaxLength="30" sap:label="Nome 1" sap:quickinfo="Nome"/>
+            </EntityType>
+            <EntityType Name="ChequesType" sap:label="Lista de Cheques do pagamento" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zzvalefrete"/>
+                    <PropertyRef Name="IdLanc"/>
+                    <PropertyRef Name="NrCheque"/>
+                </Key>
+                <Property Name="Zzvalefrete" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="VF ID"/>
+                <Property Name="IdLanc" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Id Lançamento"/>
+                <Property Name="NrCheque" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="Número do Cheque" sap:quickinfo="Nº Cheque"/>
+            </EntityType>
+            <EntityType Name="PagamentosStatusType" sap:label="Status de Pagamentos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zzvalefrete"/>
+                    <PropertyRef Name="Ebeln"/>
+                    <PropertyRef Name="IdLanc"/>
+                </Key>
+                <Property Name="Zzvalefrete" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="VF ID"/>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Documento de compras" sap:quickinfo="Nº do documento de compras"/>
+                <Property Name="IdLanc" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Id Lançamento"/>
+                <Property Name="Bukrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Empresa"/>
+                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Nº documento" sap:quickinfo="Nº documento de um documento contábil"/>
+                <Property Name="Gjahr" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
+                <Property Name="Bukrs2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Empresa"/>
+                <Property Name="Belnr2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Nº documento" sap:quickinfo="Nº documento de um documento contábil"/>
+                <Property Name="Gjahr2" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status pag Pamcary" sap:quickinfo="Status de pagamento Pamcary"/>
+                <Property Name="Etapa" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Etapa de proc pag" sap:quickinfo="Próxima etapa de processamento de pagamento"/>
+                <Property Name="MeioPagto" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Meio de pagamento"/>
+                <Property Name="NrCheque" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Nº Cheque"/>
+                <Property Name="Justificativa" Type="Edm.String" MaxLength="255" sap:display-format="UpperCase" sap:label="Justificativa" sap:quickinfo="Justificativa Pagamento"/>
+                <Property Name="DataJustificativa" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data"/>
+                <Property Name="UsuarioJustificativa" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Nome do usuário"/>
+                <NavigationProperty Name="to_Cheques" Relationship="cds_zui_fi_vf_pamcary.assoc_8991547F225AAA42DCD08EC737D5E27C" FromRole="FromRole_assoc_8991547F225AAA42DCD08EC737D5E27C" ToRole="ToRole_assoc_8991547F225AAA42DCD08EC737D5E27C"/>
+            </EntityType>
+            <EntityType Name="ZI_FI_STATUS_VF_VHType" sap:label="Ajuda de Pesquisa Status Vale Frete" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DomainValue"/>
+                </Key>
+                <Property Name="DomainValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="DomainText" sap:label="Valor inferior" sap:quickinfo="Valores p/domínios: valor ind./limite inferior"/>
+                <Property Name="DomainText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+            </EntityType>
+            <EntityType Name="ZI_FI_TIPO_VF_VHType" sap:label="Ajuda de Pesquisa Tipo Vale Frete" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DomainValue"/>
+                </Key>
+                <Property Name="DomainValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="DomainText" sap:label="Valor inferior" sap:quickinfo="Valores p/domínios: valor ind./limite inferior"/>
+                <Property Name="DomainText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+            </EntityType>
+            <EntityType Name="ZI_FI_TOR_ETAPASType" sap:label="Vale Frete - Pagamentos (Etapas)" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TorId"/>
+                    <PropertyRef Name="PlanTransTime"/>
+                    <PropertyRef Name="Data"/>
+                    <PropertyRef Name="Hora"/>
+                    <PropertyRef Name="LogLocidP"/>
+                    <PropertyRef Name="LogLocidS"/>
+                </Key>
+                <Property Name="TorId" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="Documento"/>
+                <Property Name="PlanTransTime" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Data" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Data Planejada"/>
+                <Property Name="Hora" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Hora Planejada"/>
+                <Property Name="LogLocidP" Type="Edm.String" Nullable="false" MaxLength="20" sap:text="UnidadeOrigem" sap:label="UG Origem" sap:quickinfo="Unidade gerencial"/>
+                <Property Name="LogLocidS" Type="Edm.String" Nullable="false" MaxLength="20" sap:text="UnidadeDestino" sap:label="UG Destino" sap:quickinfo="Unidade gerencial"/>
+                <Property Name="UnidadeOrigem" Type="Edm.String" MaxLength="40" sap:label="Nome" sap:quickinfo="Nome 1"/>
+                <Property Name="UnidadeDestino" Type="Edm.String" MaxLength="40" sap:label="Nome" sap:quickinfo="Nome 1"/>
+                <Property Name="ActualDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data Efetiva"/>
+                <Property Name="HoraEfetiva" Type="Edm.Time" Precision="0" sap:label="Hora Efetiva"/>
+                <Property Name="Icon" Type="Edm.Byte"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="17" sap:label="Status"/>
+            </EntityType>
+            <EntityType Name="ZI_FI_VF_PAGAMENTO_OPC_MEIO2Type" sap:label="Value Help para Meio de Pagamento" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DomainValue"/>
+                </Key>
+                <Property Name="DomainValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="ZDomainText" sap:label="Valor inferior" sap:quickinfo="Valores p/domínios: valor ind./limite inferior"/>
+                <Property Name="isDinheiro" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Código" sap:quickinfo="Código para workflow"/>
+                <Property Name="ZDomainText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+            </EntityType>
+            <EntityType Name="ValeFretePamcaryDadosType" sap:label="Vale Frete - Pagamento Pamcary" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ValeFrete"/>
+                </Key>
+                <Property Name="ValeFrete" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="VF ID"/>
+                <Property Name="Proprietario" Type="Edm.String" MaxLength="256" sap:label="Proprietário"/>
+                <Property Name="TipoProprietario" Type="Edm.String" MaxLength="256" sap:label="Tipo Proprietário"/>
+                <Property Name="Equiparacao" Type="Edm.String" MaxLength="256" sap:label="Equiparação"/>
+                <Property Name="Motorista" Type="Edm.String" MaxLength="256" sap:label="Motorista"/>
+                <Property Name="Placa" Type="Edm.String" MaxLength="256" sap:label="Placa"/>
+                <Property Name="RNTRC" Type="Edm.String" MaxLength="256" sap:label="RNTRC"/>
+                <Property Name="UnidadeOrigem" Type="Edm.String" MaxLength="256" sap:label="Unidade Origem"/>
+                <Property Name="DataPartida" Type="Edm.String" MaxLength="256" sap:label="Data da Partida"/>
+                <Property Name="EnderecoOrigem" Type="Edm.String" MaxLength="256" sap:label="Endereço Origem"/>
+                <Property Name="UnidadeDestino" Type="Edm.String" MaxLength="256" sap:label="Unidade Destino"/>
+                <Property Name="DataChegada" Type="Edm.String" MaxLength="256" sap:label="Data Chegada"/>
+                <Property Name="EnderecoDestino" Type="Edm.String" MaxLength="256" sap:label="Endereço Destino"/>
+                <Property Name="NotasQtde" Type="Edm.Int16" sap:label="Quantidade de Notas"/>
+                <Property Name="NotasQtdeDigi" Type="Edm.Int16" sap:label="Quantidade de Notas Digitalizadas"/>
+            </EntityType>
+            <EntityType Name="ValeFretePamcaryType" sap:label="Vale Frete - Pagamento Pamcary" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zzvalefrete"/>
+                </Key>
+                <Property Name="Zzvalefrete" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="VF ID"/>
+                <Property Name="TorId" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Documento"/>
+                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Vale Frete" sap:quickinfo="Nº do documento de compras" sap:value-list="standard"/>
+                <Property Name="TpvaleFrete" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:text="TipoVFText" sap:label="Tipo de Vale Frete" sap:value-list="fixed-values"/>
+                <Property Name="SfirId" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="DFF" sap:quickinfo="Documento de faturamento de frete"/>
+                <Property Name="Ciot" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="CIOT"/>
+                <Property Name="DataEmissao" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Data de criação" sap:quickinfo="Criar data"/>
+                <Property Name="UsCriador" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Criado por" sap:quickinfo="Nome do usuário"/>
+                <Property Name="DataModif" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Modificado em" sap:quickinfo="Data de modificação"/>
+                <Property Name="UsModif" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Modificado por" sap:quickinfo="Nome do usuário"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:text="StatusText" sap:label="Status Vale Frete" sap:value-list="fixed-values"/>
+                <Property Name="TipoVFText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="DocNumMdfe" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Num Doc MDFe"/>
+                <Property Name="NFnum9mdfe" Type="Edm.String" MaxLength="9" sap:label="Num MDFe"/>
+                <Property Name="Origem" Type="Edm.String" MaxLength="20" sap:text="Origem_Nome" sap:label="Origem" sap:quickinfo="Unidade gerencial"/>
+                <Property Name="Destino" Type="Edm.String" MaxLength="20" sap:text="Destino_Nome" sap:label="Destino" sap:quickinfo="Unidade gerencial"/>
+                <Property Name="Documento" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Documento Favorecido" sap:quickinfo="Nº ID fiscal para parceiro de negócios"/>
+                <Property Name="Favorecido" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="Favorecido_Nome" sap:label="Favorecido" sap:quickinfo="Proprietário do recurso"/>
+                <Property Name="Status_Pgto_Id" Type="Edm.String" MaxLength="1" sap:text="StatusPgtoText" sap:label="Status de Pagamento" sap:value-list="fixed-values"/>
+                <Property Name="Origem_Nome" Type="Edm.String" MaxLength="80"/>
+                <Property Name="Favorecido_Nome" Type="Edm.String" MaxLength="81"/>
+                <Property Name="Destino_Nome" Type="Edm.String" MaxLength="80"/>
+                <Property Name="StatusText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="StatusPgtoText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="DomainText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="bupla" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Local de negócio" sap:quickinfo="Centro"/>
+                <NavigationProperty Name="to_Dados" Relationship="cds_zui_fi_vf_pamcary.assoc_EE03E74B890B7B7C1C47BFB6FA034342" FromRole="FromRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342" ToRole="ToRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342"/>
+                <NavigationProperty Name="to_Stops" Relationship="cds_zui_fi_vf_pamcary.assoc_D0CEFE609EB33C3BBF2256B7C96F4383" FromRole="FromRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383" ToRole="ToRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383"/>
+                <NavigationProperty Name="to_Valores" Relationship="cds_zui_fi_vf_pamcary.assoc_01F0AD86DD281F2627116BCB04C73CD5" FromRole="FromRole_assoc_01F0AD86DD281F2627116BCB04C73CD5" ToRole="ToRole_assoc_01F0AD86DD281F2627116BCB04C73CD5"/>
+            </EntityType>
+            <EntityType Name="StatusPagamentoType" sap:label="Value Help para Status Pagamento" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DomainValue"/>
+                </Key>
+                <Property Name="DomainValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="DomainText" sap:label="Valor inferior" sap:quickinfo="Valores p/domínios: valor ind./limite inferior"/>
+                <Property Name="DomainText" Type="Edm.String" MaxLength="60" sap:label="Descrição breve" sap:quickinfo="Texto breve para valores fixos"/>
+            </EntityType>
+            <EntityType Name="ValeFretePamcaryValoresType" sap:label="Vale Frete - Pagamento Pamcary" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ValeFrete"/>
+                    <PropertyRef Name="IdLanc"/>
+                    <PropertyRef Name="filialParam"/>
+                </Key>
+                <Property Name="BloquearDefinitivamente_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HistBloq_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Justificar_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Liberar_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pagamento_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pagar_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValeFrete" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="VF ID"/>
+                <Property Name="IdLanc" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Id Lançamento"/>
+                <Property Name="filialParam" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Loc.negócios" sap:quickinfo="Local de negócios"/>
+                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Nº documento" sap:quickinfo="Nº documento de um documento contábil"/>
+                <Property Name="Gjahr" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
+                <Property Name="Wrbtr" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="CurrencyCode" sap:label="Montante" sap:quickinfo="Montante em moeda do documento"/>
+                <Property Name="TipoValor" Type="Edm.String" MaxLength="60" sap:label="Tipo de Lançamento" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status pag Pamcary" sap:quickinfo="Status de pagamento Pamcary"/>
+                <Property Name="StatusDesc" Type="Edm.String" MaxLength="60" sap:label="Status" sap:quickinfo="Texto breve explicativo"/>
+                <Property Name="digitalizacao1" Type="Edm.Byte"/>
+                <Property Name="digitalizacao" Type="Edm.String" MaxLength="10" sap:label="Status Liberação"/>
+                <Property Name="meio_pagto" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Meio de Pagamento" sap:quickinfo="Meio de pagamento" sap:value-list="fixed-values"/>
+                <Property Name="meio_pagto_desc" Type="Edm.String" MaxLength="60" sap:label="Descrição" sap:quickinfo="Texto breve para valores fixos"/>
+                <Property Name="Acao" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Ação pag Pamcary" sap:quickinfo="Ação para pagamento Pamcary (execução)"/>
+                <Property Name="SemAcao" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Campo de seleção" sap:heading=""/>
+                <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="belnr_p" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Pagamento 1" sap:quickinfo="Nº documento de um documento contábil"/>
+                <Property Name="gjahr_p" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
+                <Property Name="belnr_p1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Pagamento 2" sap:quickinfo="Nº documento de um documento contábil"/>
+                <Property Name="gjahr_p1" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
+                <Property Name="budat" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data" sap:quickinfo="Data de lançamento no documento"/>
+                <Property Name="hist_bloq" Type="Edm.String" MaxLength="128" sap:label="Histórico bloqueio" sap:quickinfo="Histórico de bloqueio"/>
+                <Property Name="justificativa" Type="Edm.String" MaxLength="255" sap:display-format="UpperCase" sap:label="Justificativa" sap:quickinfo="Justificativa Pagamento"/>
+                <Property Name="meio_pgto_enabled" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Código" sap:quickinfo="Código para workflow"/>
+                <NavigationProperty Name="to_Cheques" Relationship="cds_zui_fi_vf_pamcary.assoc_A5E507357B612615196FEA68429A780F" FromRole="FromRole_assoc_A5E507357B612615196FEA68429A780F" ToRole="ToRole_assoc_A5E507357B612615196FEA68429A780F"/>
+            </EntityType>
+            <Association Name="assoc_EE03E74B890B7B7C1C47BFB6FA034342" sap:content-version="1">
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryType" Multiplicity="1" Role="FromRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342"/>
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryDadosType" Multiplicity="1" Role="ToRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342"/>
+            </Association>
+            <Association Name="assoc_D0CEFE609EB33C3BBF2256B7C96F4383" sap:content-version="1">
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryType" Multiplicity="1" Role="FromRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383"/>
+                <End Type="cds_zui_fi_vf_pamcary.ZI_FI_TOR_ETAPASType" Multiplicity="*" Role="ToRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383"/>
+            </Association>
+            <Association Name="assoc_01F0AD86DD281F2627116BCB04C73CD5" sap:content-version="1">
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryType" Multiplicity="1" Role="FromRole_assoc_01F0AD86DD281F2627116BCB04C73CD5"/>
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" Multiplicity="*" Role="ToRole_assoc_01F0AD86DD281F2627116BCB04C73CD5"/>
+            </Association>
+            <Association Name="assoc_A5E507357B612615196FEA68429A780F" sap:content-version="1">
+                <End Type="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" Multiplicity="1" Role="FromRole_assoc_A5E507357B612615196FEA68429A780F"/>
+                <End Type="cds_zui_fi_vf_pamcary.ChequesType" Multiplicity="*" Role="ToRole_assoc_A5E507357B612615196FEA68429A780F"/>
+            </Association>
+            <Association Name="assoc_8991547F225AAA42DCD08EC737D5E27C" sap:content-version="1">
+                <End Type="cds_zui_fi_vf_pamcary.PagamentosStatusType" Multiplicity="1" Role="FromRole_assoc_8991547F225AAA42DCD08EC737D5E27C"/>
+                <End Type="cds_zui_fi_vf_pamcary.ChequesType" Multiplicity="*" Role="ToRole_assoc_8991547F225AAA42DCD08EC737D5E27C"/>
+            </Association>
+            <EntityContainer Name="cds_zui_fi_vf_pamcary_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_PurchasingDocumentStdVH" EntityType="cds_zui_fi_vf_pamcary.I_PurchasingDocumentStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="FiliasUsuario" EntityType="cds_zui_fi_vf_pamcary.FiliasUsuarioType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Cheques" EntityType="cds_zui_fi_vf_pamcary.ChequesType" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="PagamentosStatus" EntityType="cds_zui_fi_vf_pamcary.PagamentosStatusType" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_FI_STATUS_VF_VH" EntityType="cds_zui_fi_vf_pamcary.ZI_FI_STATUS_VF_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_FI_TIPO_VF_VH" EntityType="cds_zui_fi_vf_pamcary.ZI_FI_TIPO_VF_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_FI_TOR_ETAPAS" EntityType="cds_zui_fi_vf_pamcary.ZI_FI_TOR_ETAPASType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_FI_VF_PAGAMENTO_OPC_MEIO2" EntityType="cds_zui_fi_vf_pamcary.ZI_FI_VF_PAGAMENTO_OPC_MEIO2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ValeFretePamcaryDados" EntityType="cds_zui_fi_vf_pamcary.ValeFretePamcaryDadosType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ValeFretePamcary" EntityType="cds_zui_fi_vf_pamcary.ValeFretePamcaryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="StatusPagamento" EntityType="cds_zui_fi_vf_pamcary.StatusPagamentoType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ValeFretePamcaryValores" EntityType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:creatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_8991547F225AAA42DCD08EC737D5E27C" Association="cds_zui_fi_vf_pamcary.assoc_8991547F225AAA42DCD08EC737D5E27C" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PagamentosStatus" Role="FromRole_assoc_8991547F225AAA42DCD08EC737D5E27C"/>
+                    <End EntitySet="Cheques" Role="ToRole_assoc_8991547F225AAA42DCD08EC737D5E27C"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A5E507357B612615196FEA68429A780F" Association="cds_zui_fi_vf_pamcary.assoc_A5E507357B612615196FEA68429A780F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ValeFretePamcaryValores" Role="FromRole_assoc_A5E507357B612615196FEA68429A780F"/>
+                    <End EntitySet="Cheques" Role="ToRole_assoc_A5E507357B612615196FEA68429A780F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_EE03E74B890B7B7C1C47BFB6FA034342" Association="cds_zui_fi_vf_pamcary.assoc_EE03E74B890B7B7C1C47BFB6FA034342" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ValeFretePamcary" Role="FromRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342"/>
+                    <End EntitySet="ValeFretePamcaryDados" Role="ToRole_assoc_EE03E74B890B7B7C1C47BFB6FA034342"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_01F0AD86DD281F2627116BCB04C73CD5" Association="cds_zui_fi_vf_pamcary.assoc_01F0AD86DD281F2627116BCB04C73CD5" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ValeFretePamcary" Role="FromRole_assoc_01F0AD86DD281F2627116BCB04C73CD5"/>
+                    <End EntitySet="ValeFretePamcaryValores" Role="ToRole_assoc_01F0AD86DD281F2627116BCB04C73CD5"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_D0CEFE609EB33C3BBF2256B7C96F4383" Association="cds_zui_fi_vf_pamcary.assoc_D0CEFE609EB33C3BBF2256B7C96F4383" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ValeFretePamcary" Role="FromRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383"/>
+                    <End EntitySet="ZI_FI_TOR_ETAPAS" Role="ToRole_assoc_D0CEFE609EB33C3BBF2256B7C96F4383"/>
+                </AssociationSet>
+                <FunctionImport Name="BloquearDefinitivamente" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="BloquearDefinitivamente_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                </FunctionImport>
+                <FunctionImport Name="HistBloq" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="HistBloq_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                    <Parameter Name="HistBloq" Type="Edm.String" Mode="In" MaxLength="128" Nullable="true" sap:label="Histórico bloqueio"/>
+                </FunctionImport>
+                <FunctionImport Name="Justificar" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="Justificar_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                    <Parameter Name="justificativa" Type="Edm.String" Mode="In" MaxLength="255" Nullable="true" sap:label="Justificativa"/>
+                </FunctionImport>
+                <FunctionImport Name="Liberar" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="Liberar_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                </FunctionImport>
+                <FunctionImport Name="Pagamento" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="Pagamento_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                </FunctionImport>
+                <FunctionImport Name="Pagar" ReturnType="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" EntitySet="ValeFretePamcaryValores" m:HttpMethod="POST" sap:action-for="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType" sap:applicable-path="Pagar_ac">
+                    <Parameter Name="ValeFrete" Type="Edm.String" Mode="In" MaxLength="18" sap:label="VF ID"/>
+                    <Parameter Name="IdLanc" Type="Edm.String" Mode="In" MaxLength="1" sap:label="Id Lançamento"/>
+                    <Parameter Name="filialParam" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Loc.negócios"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="cds_zui_fi_vf_pamcary.ValeFretePamcaryType/Ebeln" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Documento de compras"/>
+                        <PropertyValue Property="CollectionPath" String="I_PurchasingDocumentStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Ebeln"/>
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingDocument"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.ValeFretePamcaryType/TpvaleFrete" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Tipo de Vale Frete"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_FI_TIPO_VF_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="TpvaleFrete"/>
+                                    <PropertyValue Property="ValueListProperty" String="DomainValue"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DomainText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.ValeFretePamcaryType/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Status Vale Frete"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_FI_STATUS_VF_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Status"/>
+                                    <PropertyValue Property="ValueListProperty" String="DomainValue"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DomainText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.ValeFretePamcaryType/Status_Pgto_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="StatusPagamento"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Status_Pgto_Id"/>
+                                    <PropertyValue Property="ValueListProperty" String="DomainValue"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DomainText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.ValeFretePamcaryValoresType/meio_pagto" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Meio de pagamento"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_FI_VF_PAGAMENTO_OPC_MEIO2"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="meio_pagto"/>
+                                    <PropertyValue Property="ValueListProperty" String="DomainValue"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="isDinheiro"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ZDomainText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.cds_zui_fi_vf_pamcary_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.cds_zui_fi_vf_pamcary_Entities/ValeFretePamcary" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DataEmissao"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DataModif"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.cds_zui_fi_vf_pamcary_Entities/ValeFretePamcaryDados" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Proprietario"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="TipoProprietario"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Equiparacao"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Motorista"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Placa"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="RNTRC"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="UnidadeOrigem"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DataPartida"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="EnderecoOrigem"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="UnidadeDestino"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DataChegada"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="EnderecoDestino"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Proprietario</PropertyPath>
+                                <PropertyPath>TipoProprietario</PropertyPath>
+                                <PropertyPath>Equiparacao</PropertyPath>
+                                <PropertyPath>Motorista</PropertyPath>
+                                <PropertyPath>Placa</PropertyPath>
+                                <PropertyPath>RNTRC</PropertyPath>
+                                <PropertyPath>UnidadeOrigem</PropertyPath>
+                                <PropertyPath>DataPartida</PropertyPath>
+                                <PropertyPath>EnderecoOrigem</PropertyPath>
+                                <PropertyPath>UnidadeDestino</PropertyPath>
+                                <PropertyPath>DataChegada</PropertyPath>
+                                <PropertyPath>EnderecoDestino</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.cds_zui_fi_vf_pamcary_Entities/ValeFretePamcaryValores" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>BloquearDefinitivamente_ac</PropertyPath>
+                                <PropertyPath>HistBloq_ac</PropertyPath>
+                                <PropertyPath>Justificar_ac</PropertyPath>
+                                <PropertyPath>Liberar_ac</PropertyPath>
+                                <PropertyPath>Pagamento_ac</PropertyPath>
+                                <PropertyPath>Pagar_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>BloquearDefinitivamente_ac</PropertyPath>
+                                <PropertyPath>HistBloq_ac</PropertyPath>
+                                <PropertyPath>Justificar_ac</PropertyPath>
+                                <PropertyPath>Liberar_ac</PropertyPath>
+                                <PropertyPath>Pagamento_ac</PropertyPath>
+                                <PropertyPath>Pagar_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_fi_vf_pamcary.cds_zui_fi_vf_pamcary_Entities/PagamentosStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Cheques"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="true"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://dev:8070/sap/opu/odata/sap/ZGW_FI_VF_PAMCARY/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://dev:8070/sap/opu/odata/sap/ZGW_FI_VF_PAMCARY/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
